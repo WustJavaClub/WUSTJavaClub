@@ -1,0 +1,13 @@
+- [2917. 找出数组中的 K-or 值](https://leetcode.cn/problems/find-the-k-or-of-an-array/description/)
+- [268. 丢失的数字](https://leetcode.cn/problems/missing-number/description/)
+- [35. 搜索插入位置](https://leetcode.cn/problems/search-insert-position/)
+- [69. x 的平方根](https://leetcode.cn/problems/sqrtx/description/)
+- [338. 比特位计数](https://leetcode.cn/problems/counting-bits/description/)
+- [477. 汉明距离总和](https://leetcode.cn/problems/total-hamming-distance/description/)
+- [784. 字母大小写全排列](https://leetcode.cn/problems/letter-case-permutation/description/)
+- [90. 子集 II](https://leetcode.cn/problems/subsets-ii/description/)
+- [793. 阶乘函数后 K 个零](https://leetcode.cn/problems/preimage-size-of-factorial-zeroes-function/description/)
+- [982. 按位与为零的三元组](https://leetcode.cn/problems/triples-with-bitwise-and-equal-to-zero/description/)
+- [1178. 猜字谜](https://leetcode.cn/problems/number-of-valid-words-for-each-puzzle/description/)
+- [U378574 Palindrome Pairs](https://www.luogu.com.cn/problem/U378574)
+
