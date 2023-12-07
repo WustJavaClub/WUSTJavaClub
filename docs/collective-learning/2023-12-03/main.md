@@ -69,16 +69,16 @@ List<List<Integer>> adj;
 visited : boolean[]
 graph : Graph
 function dfs(start):
- if start is visited
-  return
- visited[start] := true
- for i in graph.next(start):
-  dfs(i)
+    if start is visited
+        return
+    visited[start] := true
+    for i in graph.next(start):
+        dfs(i)
   
 # 图可能不连通，对每个点作为起点均遍历一次，如果某个节点已经在之前遍历时访问过了，则跳过
 function traverse(): 
- for i in nodeIndex:
-  dfs(i)
+    for i in nodeIndex:
+        dfs(i)
 ```
 
 ### BFS
@@ -87,22 +87,22 @@ function traverse():
 visited : boolean[]
 graph : Graph
 function bfs(start) :
- if start is visited
-  return
- visited[start] := true
- queue : Queue
- queue.add(start)
- while queue not empty:
-  current := queue.poll()
-  if current is visited
-   continue
-  for i in graph.next(current):
-   queue.add(i)
+    if start is visited
+        return
+    visited[start] := true
+    queue : Queue
+    queue.add(start)
+    while queue not empty:
+        current := queue.poll()
+    if current is visited
+        continue
+    for i in graph.next(current):
+       queue.add(i)
  
 # 图可能不连通，对每个点作为起点均遍历一次，如果某个节点已经在之前遍历时访问过了，则跳过
 function traverse(): 
- for i in nodeIndex:
-  bfs(i)
+    for i in nodeIndex:
+        bfs(i)
 ```
 
 ## 拓扑排序
@@ -136,17 +136,17 @@ graph : Graph
 indegree : int[]
 output : List
 function kahn() :
- init -> indegree
- while exist indegree==0 :
-  node := findIndegreeEqualZero()
-  output.add(node)
-  remove(node)
-  update indegree
- if output.size == graph.poiontCount :
-  return output
- else :
-  # There is no topological sequence
-  exit
+    init -> indegree
+    while exist indegree==0 :
+        node := findIndegreeEqualZero()
+    output.add(node)
+    remove(node)
+    update indegree
+    if output.size == graph.poiontCount :
+        return output
+    else :
+        # There is no topological sequence
+        exit
 ```
 
 每个节点和边均访问了一次
@@ -163,22 +163,22 @@ status : int[]
 graph : Graph
 output : List
 function dfs(start) :
- if start is visiting :
-  # cyclic exists, there is no topological sequence
-  exit
- if start is visited :
-  return
- status[start] := visiting
- for i in graph.next(start) :
-  dfs(i)
- status[start] := visited
- output.add(start)
+    if start is visiting :
+        # cyclic exists, there is no topological sequence
+        exit
+    if start is visited :
+        return
+    status[start] := visiting
+    for i in graph.next(start) :
+        dfs(i)
+    status[start] := visited
+    output.add(start)
 
 function topologicalSort() :
- init -> status
- for i in nodeIndex :
-  dfs(i)
- reverse(output)
+    init -> status
+    for i in nodeIndex :
+        dfs(i)
+    reverse(output)
 ```
 
 每个节点和边均访问了一次
@@ -208,16 +208,16 @@ function topologicalSort() :
 
 ```
 function kruskal(edges) :
- MST := {}
- sort(edges)
- for edge in edges :
-  if cycled :
-   continue
-  addMST(edge)
-  if MST.size == graph.pointCount - 1 :
-   return MST
- # The graph is not connected
- exit
+    MST := {}
+    sort(edges)
+    for edge in edges :
+        if cycled :
+            continue
+        addMST(edge)
+        if MST.size == graph.pointCount - 1 :
+            return MST
+    # The graph is not connected
+    exit
 ```
 
 时间复杂度：$O(E\log E)$，其中 $E$ 是图的边数
@@ -231,20 +231,20 @@ function kruskal(edges) :
 ```
 graph : Graph
 function prim() :
- from := randomInt()
- rest := graph.v - {from}
- MST := {from}
- edges := {}
- while rest is non-empty :
-  # Extend the newly added points
-  edges := edges + {the edge with from to the point in rest}
-  next := the node with the minimum dis from MST to rest in edges
-  if next is null :
-   # The graph is not connected
-   exit
-  move next to MST
-  from := current
- return MST
+    from := randomInt()
+    rest := graph.v - {from}
+    MST := {from}
+    edges := {}
+    while rest is non-empty :
+        # Extend the newly added points
+        edges := edges + {the edge with from to the point in rest}
+        next := the node with the minimum dis from MST to rest in edges
+        if next is null :
+            # The graph is not connected
+            exit
+        move next to MST
+        from := current
+    return MST
 ```
 
 时间复杂度取决于如何选择点
@@ -283,17 +283,18 @@ a  ---  b
 ```
 graph : Graph
 function dijkstra(int start) :
- distance := A list of length n with infinite values
- distance[start] := 0
- rest := graph.v
- edges := {}
- while rest is non-empty :
-  u := find minimum distance node in rest set
-  rest := rest - {u}
-  for v in graph.next(u) :
-   if distance[v] > distance[u] + weight(u, v) :
-    distance[v] = distance[u] + weight(u, v)
-    # Here can record the precursor node to find the shortest path
+    distance := A list of length n with infinite values
+    distance[start] := 0
+    rest := graph.v
+    edges := {}
+    while rest is non-empty :
+        u := find minimum distance(from start) node in rest set
+        rest := rest - {u}
+        for v in graph.next(u) :
+        if distance[v] > distance[u] + weight(u, v) :
+            distance[v] = distance[u] + weight(u, v)
+            # Here can record the precursor node to find the shortest path
+    return distance
 ```
 
 时间复杂度取决于如何选择点（和Prim算法相同）：
@@ -322,18 +323,19 @@ function dijkstra(int start) :
 ```
 graph : Graph
 function floyd() :
- n := graph.pointCount
- distanc := An n times n matrix with a value of infinate
- for i in graph.nodeIndex :
-  distance[i][i] := 0
- for edge(u, v) in graph.edges : 
-  distance[u][v] := weight(u, v)
- for k from 1 to n : 
-  for i from 1 to n :
-   for j from 1 to n :
-    if distance[i][j] > distance[i][k] + distance[k][j] :
-     distance[i][j] := distance[i][k] + distance[k][j]
-     # Here can record the precursor node to find the shortest path
+    n := graph.pointCount
+    distanc := An n times n matrix with a value of infinate
+    for i in graph.nodeIndex :
+        distance[i][i] := 0
+    for edge(u, v) in graph.edges : 
+        distance[u][v] := weight(u, v)
+    for k from 1 to n : 
+        for i from 1 to n :
+            for j from 1 to n :
+                if distance[i][j] > distance[i][k] + distance[k][j] :
+                    distance[i][j] := distance[i][k] + distance[k][j]
+                    # Here can record the precursor node to find the shortest path
+    return distance
 ```
 
 时间复杂度：$O(n^3)$
@@ -366,3 +368,4 @@ function floyd() :
 [图论最短距离(Shortest Path)算法动画演示 - Bilibili](https://www.bilibili.com/video/BV1q4411M7r9/)
 
 [迪杰斯特拉算法代码可视化(Dijkstra) - Bilibili](https://www.bilibili.com/video/BV1JA4y1Q7PB/)
+
