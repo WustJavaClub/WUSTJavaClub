@@ -94,10 +94,10 @@ function bfs(start) :
     queue.add(start)
     while queue not empty:
         current := queue.poll()
-    if current is visited
-        continue
-    for i in graph.next(current):
-       queue.add(i)
+        if current is visited
+            continue
+        for i in graph.next(current):
+           queue.add(i)
  
 # 图可能不连通，对每个点作为起点均遍历一次，如果某个节点已经在之前遍历时访问过了，则跳过
 function traverse(): 
