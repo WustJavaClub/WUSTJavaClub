@@ -137,11 +137,11 @@ indegree : int[]
 output : List
 function kahn() :
     init -> indegree
-    while exist indegree==0 :
+    while exist indegree==0:
         node := findIndegreeEqualZero()
-    output.add(node)
-    remove(node)
-    update indegree
+        output.add(node)
+        indegree.remove(node)
+        update indegree
     if output.size == graph.poiontCount :
         return output
     else :
